@@ -7,10 +7,10 @@ Le but de ce programme est de lire une image PPM, de stocker ses données en mé
 Vous trouverez dans ce repository : 
 * le fichier "consigne-projet.pdf" qui explique en détail du projet 
 * le fichier "image.java" où il y a le code du programme répondant au projet
-* l'image "truc.ppm" qui est utilisée dans le programme 
-* un dossier "image_ppm" avec des exemples d'autres images pour aller plus loin et faire des transformation dessus avec le programme
+* l'image "truc.ppm" qui est utilisée par le programme 
+* un dossier "image_ppm" avec des exemples d'autres images pour aller plus loin et faire des transformations dessus avec le programme
 
-Les contraintes à utiliser pour faire ce projet (les 2 premiers points sont les plus importants) : 
+Les contraintes à utiliser pour faire ce projet sont les suivantes (les 2 premiers points sont les plus importants) : 
 
 1. Structure de données : 
 * Utilisation des listes chainées pour stocker les données en mémoire (liste chainée native pas de linkedlist ou de collection)
