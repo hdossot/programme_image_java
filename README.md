@@ -9,3 +9,12 @@ Vous trouverez dans ce repository :
 * le fichier "image.java" où il y a le code du programme répondant au projet
 * l'image "truc.ppm" qui est utilisée dans le programme 
 * un dossier image avec des exemples d'images pour aller plus loin et faire des transformation avec le programme
+
+Les contraintes à utiliser pour faire projet : 
+* Utilisation des listes chainées pour stocker les données en mémoire (gestion native pas de linkedlist)
+* Gestion des exceptions (throw, catch)
+* Attention à la visibilité des méthodes et attributs (private à privilégier)
+* utilisation des mots clés : @override, this
+* utiliser une classe d'interface
+* Opérations que doit faire le programme : 
+** frrf
