@@ -6,7 +6,7 @@ Le but de ce programme est de lire une image PPM, de stocker ses données en mé
 
 Vous trouverez dans ce repository : 
 * le fichier "consigne-projet.pdf" qui explique en détail du projet 
-* le fichier "image.java" où il y a le code du programme répondant au projet
+* le fichier "image.java" où il y a le code du programme répondant au projet (le code a été réalisé et testé avec Eclipse)
 * l'image "truc.ppm" qui est utilisée par le programme 
 * un dossier "image_ppm" avec des exemples d'autres images pour aller plus loin et faire des transformations dessus avec le programme
 
