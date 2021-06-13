@@ -38,10 +38,12 @@ public class Segment{
 		this.pixelNum = pixelNum;
 	}
 	
-	// Create method to darken a pixel color respect the dominant primary color
+	// Create darken_color method 
 	
-	// Create a method to black and white an pixel 
+	// Create lighten_color method 
 	
-	// Create a method to create negative of a pixel
+	// Create black_n_white method
+	
+	// Create negative_color method
 }
 
