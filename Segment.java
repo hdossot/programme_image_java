@@ -4,6 +4,7 @@ public class Segment{
 	private int red=0;
 	private int green=0;
 	private int blue=0;
+	private int pixelNum=0;
 
 	public int getRed() {
 		return red;
@@ -27,6 +28,14 @@ public class Segment{
 
 	public void setBlue(int blue) {
 		this.blue = blue;
+	}
+
+	public int getPixelNum() {
+		return pixelNum;
+	}
+
+	public void setPixelNum(int pixelNum) {
+		this.pixelNum = pixelNum;
 	}
 	
 	// Create method to darken a pixel color respect the dominant primary color
