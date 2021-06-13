@@ -6,8 +6,8 @@ Le but de ce programme est de lire une image PPM, de stocker ses données en mé
 
 Vous trouverez dans ce repository : 
 * le fichier "consigne-projet.pdf" qui explique en détail du projet 
-* le fichier "ImageTreament.java" où il y a le code du programme répondant au projet (le code a été réalisé et testé avec Eclipse)
-* le fichier "Image.java" qui représente la classe Image, le fichier "Segment.java" qui représente la classe Segment, la fichier "Terminal.java" permettant d'interagir facilement avec le terminal
+* les fichiers de codes : "ImageTreament.java" -> code regroupant les traitements et la fonction main, "Image.java" -> classe permettant de définir l'objet Image (attributs, méthodes),  "Segment.java" -> classe permettant de définir l'objet Segment (attributs, méthodes), "LoadImage" -> classe permettant de charger l'image, "SaveImage" -> classe permettant de sauvegarder l'image, "Terminal.java" -> la classe permettant d'interagir facilement avec le terminal(le code a été réalisé et testé avec Eclipse)
+* le fichier , le fichier, la fichier 
 * l'image "truc.ppm" qui est utilisée par le programme 
 * un dossier "image_ppm" avec des exemples d'autres images pour aller plus loin et faire des transformations dessus avec le programme
 
