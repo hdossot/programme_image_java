@@ -2,6 +2,8 @@ package project;
 
 import java.util.List;
 
+import spreadsheet_project.Terminal;
+
 public class Image {
 	
 	// Initialize attributs 
@@ -78,8 +80,16 @@ public class Image {
 	}
 	
 	// Darken_image method
-	public void darken(String color) {
-    	if(color == "red") {
+	public void darken() {
+		String color;
+		Terminal.ecrireString("Choisissez la couleur primaire que vous voulez assombrir : rouge, vert ou bleu"); 
+		color = Terminal.lireString();
+		//color = color.replace("\\r", "\r");
+		//color = color.replace("\n", "");
+		System.out.println(color);
+		System.out.println(color.getClass());
+    	if(color.charAt(0) == "rouge".charAt(0)) {
+    		System.out.println("in red");
 			for(int i = 0; i < segmentTab.size(); i++) {
 		    	Segment seg = new Segment();
 		    	seg = segmentTab.get(i);
@@ -91,7 +101,7 @@ public class Image {
 		    	}	    		
 	    	}
 		}
-    	if(color == "green") {
+    	if(color.charAt(0) == "vert".charAt(0)) {
 			for(int i = 0; i < segmentTab.size(); i++) {
 		    	Segment seg = new Segment();
 		    	seg = segmentTab.get(i);
@@ -103,7 +113,7 @@ public class Image {
 		    	}	    		
 	    	}
 		}
-    	if(color == "blue") {
+    	if(color.charAt(0) == "bleu".charAt(0)) {
 			for(int i = 0; i < segmentTab.size(); i++) {
 		    	Segment seg = new Segment();
 		    	seg = segmentTab.get(i);

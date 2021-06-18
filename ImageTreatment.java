@@ -2,6 +2,7 @@ package project;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import spreadsheet_project.Terminal;
 
@@ -85,7 +86,7 @@ public class ImageTreatment {
                 InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
                 BufferedReader bufferedReader = new BufferedReader(inputStreamReader)) {
            	
-           	System.out.println("le fichier a été trouvé");
+           	//System.out.println("le fichier a été trouvé");
            	image.setFirstLine("P3");
            	// Read file by line and for each line clean from special char
                while ((line = bufferedReader.readLine()) != null) {
@@ -102,21 +103,21 @@ public class ImageTreatment {
                    
                    // if it's a comment line 
                    if (stringTab[0].charAt(0) == '#') {
-                       System.out.println(" ligne commentaire : "+line);
+                       //System.out.println(" ligne commentaire : "+line);
                        image.setComment(line);
                    }
                    
                    // or if it's the line with dimension information
                    else if (stringTab[0].charAt(0) != '#' && stringTab.length == 2) {
-                   	System.out.println("ligne avec Width : "+stringTab[0]);
-                   	System.out.println("ligne avec Height : "+stringTab[1]);
+                   	// System.out.println("ligne avec Width : "+stringTab[0]);
+                   	// System.out.println("ligne avec Height : "+stringTab[1]);
                        image.setWidth(Integer.parseInt(stringTab[0]));
                        image.setHeight(Integer.parseInt(stringTab[1]));
                    }
                    
                    // or if it's the color scale information
                    else if (stringTab[0].charAt(0) != '#' && stringTab.length == 1 && isNumeric(stringTab[0])) {
-                   	System.out.println("ligne avec échelle de couleur : "+stringTab[0]);
+                   	//System.out.println("ligne avec échelle de couleur : "+stringTab[0]);
                    	   image.setColorScale(Integer.parseInt(stringTab[0]));
                        //break;
                    }
@@ -152,10 +153,10 @@ public class ImageTreatment {
 	                        		   seg.setGreen(greenLast);
 	                        		   seg.setBlue(blueLast);
 	                        		   seg.setCount(count);
-	                        		   System.out.println(seg.getRed());
-		                        	   System.out.println(seg.getGreen());
-		                        	   System.out.println(seg.getBlue());
-		                        	   System.out.println(seg.getCount());
+	                        		   //System.out.println(seg.getRed());
+		                        	   //System.out.println(seg.getGreen());
+		                        	   //System.out.println(seg.getBlue());
+		                        	   //System.out.println(seg.getCount());
 		                        	   segmentTab.add(seg);
 		                               redLast = red;
 		                               greenLast = green;
@@ -170,18 +171,18 @@ public class ImageTreatment {
                }
                //System.out.println("change pixel color");
                Segment seg = new Segment();
-        	   System.out.println(redLast);
-        	   System.out.println(greenLast);
-        	   System.out.println(blueLast);
-        	   System.out.println(count);
+        	   //System.out.println(redLast);
+        	   //System.out.println(greenLast);
+        	   //System.out.println(blueLast);
+        	   //System.out.println(count);
         	   seg.setRed(redLast);
     		   seg.setGreen(greenLast);
     		   seg.setBlue(blueLast);
     		   seg.setCount(count);
-    		   System.out.println(seg.getRed());
-        	   System.out.println(seg.getGreen());
-        	   System.out.println(seg.getBlue());
-        	   System.out.println(seg.getCount());
+    		   //System.out.println(seg.getRed());
+        	   //System.out.println(seg.getGreen());
+        	   //System.out.println(seg.getBlue());
+        	   //System.out.println(seg.getCount());
         	   segmentTab.add(seg);
         	   image.setSegmentTab(segmentTab);
 		}catch(FileNotFoundException ex){
@@ -209,7 +210,7 @@ public class ImageTreatment {
 			List<Segment> segmentTab = new ArrayList<>();
 			segmentTab = image.getSegmentTab();
 			fichier = new FileOutputStream(imagePath+nomFichier ); 
-			System.out.println(segmentTab.size());
+			// System.out.println(segmentTab.size());
 		    for(int i = 0; i < segmentTab.size(); i++) {
 		    	Segment seg = new Segment();
 		    	seg = segmentTab.get(i);
@@ -252,11 +253,51 @@ public class ImageTreatment {
 	}
 
     public static void main(String[] args){  
-    	Image image = new Image();  	       
-		image = loadImage();
+    	Image image = new Image();  
+    	Scanner scanner = new Scanner(System.in);
+    	
+    	// Demander à l'utilisateur les actions à réalisés
+	    String menu = "*** Menu *** \n"+
+	    "Pour choisir les différentes opérations, entrer la commande correspondante dans le terminal : \n" +
+	    "  Importer une image                                   i\n"+
+	    "  Assombrir                                            a\n"+
+	    "  Enregistrer une image                                e\n"+
+	    "  Quitter le programme                                 q\n";
+	
+		// Tant que l'utilisateur n'a pas quitté, lui afficher le menu des choix
+		while(true){
+			System.out.print("\n" + menu);
+	  
+			// Enregistrer la commande de l'utilisateur et réaliser l'action correspondante
+			String input = scanner.nextLine();
+	  
+			// Encapsuler l'opération dans un try afin de gérer les erreurs
+	  
+			try{
+				// Tester les différents cas en fonction de la demande de l'utilisateur
+				switch(input){
+					case "i":
+						image = loadImage();
+						break;
+					case "a":
+						image.darken();
+				        break;
+					case "e":
+						saveImage(image);
+					case "q":
+						break;
+				default:
+					System.out.println("Error: Please enter one of the commands in the menu");
+		}
+	}
+	finally {
+		  
+	}
+		}
+		
 		//System.out.println(image.getComment());
-		image.darken("red");
+		
 		//image.darken("green");
-		saveImage(image);
+		
     }    
 }
