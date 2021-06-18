@@ -1,10 +1,10 @@
 package project;
 
 public class Segment{
-	private int red=0;
-	private int green=0;
-	private int blue=0;
-	private int pixelNum=0;
+	private int red;
+	private int green;
+	private int blue;
+	private int count;
 
 	public int getRed() {
 		return red;
@@ -30,12 +30,27 @@ public class Segment{
 		this.blue = blue;
 	}
 
-	public int getPixelNum() {
-		return pixelNum;
+	public int getCount() {
+		return count;
 	}
 
-	public void setPixelNum(int pixelNum) {
-		this.pixelNum = pixelNum;
+	public void setCount(int pixelNum) {
+		this.count = pixelNum;
+	}
+
+	public void setNext(Segment seg2) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setSize(int size) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public int getSize() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 	
 	// Create darken_color method 
