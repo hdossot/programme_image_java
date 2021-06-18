@@ -3,9 +3,6 @@ package project;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-
-import spreadsheet_project.Terminal;
-
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -13,6 +10,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+
 //import java.io.DataInputStream;
 //import java.io.File;
 //import java.io.FileNotFoundException;
@@ -42,6 +40,7 @@ public class ImageTreatment {
 	    return true;
 	}
 	
+	// Fonction permettant d'importer une image  
 	public static Image loadImage () {
     	// Variable initialization
 
@@ -84,11 +83,11 @@ public class ImageTreatment {
 		
         try (	InputStream inputStream = new FileInputStream(imagePath+nomFichier);
                 InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-                BufferedReader bufferedReader = new BufferedReader(inputStreamReader)) {
-           	
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader)) {          	
            	//System.out.println("le fichier a été trouvé");
            	image.setFirstLine("P3");
-           	// Read file by line and for each line clean from special char
+           	
+           	// Faire une boucle pour lire le fichier ligne par ligne
                while ((line = bufferedReader.readLine()) != null) {
                    line = line.replaceAll("\\R", "");
                    line = line.replaceAll("^\\s+|\\s+$", "");
@@ -99,15 +98,13 @@ public class ImageTreatment {
                    newStringTab = line.split("\\s+");
                    //System.out.println("longueur de la ligne : " + line.length());
                    
-                   // For each line, check : 
-                   
-                   // if it's a comment line 
+                   // Récupération du commentaire et enregistrement dans l'attribut comment
                    if (stringTab[0].charAt(0) == '#') {
                        //System.out.println(" ligne commentaire : "+line);
                        image.setComment(line);
                    }
                    
-                   // or if it's the line with dimension information
+                   // Récupération des dimensions de l'image et enregistrement dans les attributs width et height
                    else if (stringTab[0].charAt(0) != '#' && stringTab.length == 2) {
                    	// System.out.println("ligne avec Width : "+stringTab[0]);
                    	// System.out.println("ligne avec Height : "+stringTab[1]);
@@ -115,13 +112,13 @@ public class ImageTreatment {
                        image.setHeight(Integer.parseInt(stringTab[1]));
                    }
                    
-                   // or if it's the color scale information
+                   // Récupération de l'échelle de couleur
                    else if (stringTab[0].charAt(0) != '#' && stringTab.length == 1 && isNumeric(stringTab[0])) {
                    	//System.out.println("ligne avec échelle de couleur : "+stringTab[0]);
                    	   image.setColorScale(Integer.parseInt(stringTab[0]));
                        //break;
                    }
-                   // or if it's the pixels information
+                   // Récupération de la valeur des pixels et enregistrement dans une liste de segments
                    else if (isNumeric(stringTab[0])){
                 	   stringTab = line.split("  ");
                 	   newStringTab = stringTab[0].split(" ");
@@ -193,6 +190,7 @@ public class ImageTreatment {
 		return image;
 	}
 	
+	// Fonction permettant de sauvegarder une image dans un fichier
 	public static void saveImage (Image image) {
 		String nomFichier;
 		FileOutputStream fichier ;
@@ -211,6 +209,7 @@ public class ImageTreatment {
 			segmentTab = image.getSegmentTab();
 			fichier = new FileOutputStream(imagePath+nomFichier ); 
 			// System.out.println(segmentTab.size());
+			// On parcourt la liste des segment (pixels) et on écrit les pixels dans la variable aEcrire
 		    for(int i = 0; i < segmentTab.size(); i++) {
 		    	Segment seg = new Segment();
 		    	seg = segmentTab.get(i);
@@ -228,23 +227,26 @@ public class ImageTreatment {
 		            aEcrire += seg.getGreen()+" ";
 		            aEcrire += seg.getBlue()+"  ";
 		            count+=1;
-			        if(count == 4) {
+		            // Quand on arrive à nombre de pixels égal à la largeur de l'image, on passe à la ligne
+			        if(count == image.getWidth()) {
 			        	aEcrire += "\n";
 			        	count=0;
 			        }
 		        }
-		        if(count == 4) {
+		        if(count == image.getWidth()) {
 		        	aEcrire += "\n";
 		        	count=0;
 		        }
 		    }
 		    System.out.println("L'image a bien été enregistré dans le fichier "+nomFichier);
 			//aEcrire = Terminal.lireString();
+		    // On écrit le texte dans le fichier 
 			for (int i = 0; i<aEcrire.length();i++){ 
 				fichier.write(aEcrire.charAt(i));
 			}
-			fichier.write('\r'); fichier.write('\n'); 
-			aEcrire = Terminal . lireString ();
+			fichier.write('\r'); 
+			fichier.write('\n'); 
+			//aEcrire = Terminal . lireString ();
 			fichier.close(); 
 		}catch(IOException exc){
 			Terminal.ecrireStringln("Erreur d'entree−sortie"); 
@@ -252,6 +254,7 @@ public class ImageTreatment {
 		
 	}
 
+	// Fonction main() qui exécute le programme
     public static void main(String[] args){  
     	Image image = new Image();  
     	Scanner scanner = new Scanner(System.in);
@@ -260,13 +263,13 @@ public class ImageTreatment {
     	// Demander à l'utilisateur les actions à réalisés
 	    String menu = "*** Menu *** \n"+
 	    "Pour choisir les différentes opérations, entrer la commande correspondante dans le terminal : \n" +
-	    "  Importer une image                                   i\n"+
-	    "  Assombrir                                            a\n"+
-	    "  Eclaircir une image                                 ec\n"+
-	    "  Transformer l'image en noir et blanc                nb\n"+
-	    "  Afficher la taille de l'image                       at\n"+
-	    "  Enregistrer l'image                                  e\n"+
-	    "  Quitter le programme                                 q\n";
+	    "  Importer une image                                           i\n"+
+	    "  Assombrir les couleurs de l'image                            a\n"+
+	    "  Eclaircir les couleurs de l'image                           ec\n"+
+	    "  Transformer les couleurs de l'image en noir et blanc        nb\n"+
+	    "  Afficher la taille de l'image                               at\n"+
+	    "  Enregistrer l'image dans un fichier                          e\n"+
+	    "  Quitter le programme                                         q\n";
 	
 		// Tant que l'utilisateur n'a pas quitté, lui afficher le menu des choix
 		while(bool){
@@ -310,10 +313,7 @@ public class ImageTreatment {
 		  
 	}
 		}
-		
 		//System.out.println(image.getComment());
-		
 		//image.darken("green");
-		
     }    
 }

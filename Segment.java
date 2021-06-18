@@ -1,11 +1,13 @@
 package project;
 
 public class Segment{
+	// Déclaration et initialisation des attributs de la classe
 	private int red;
 	private int green;
 	private int blue;
 	private int count;
 
+	// Méthodes getter et setter permettant d'avoir accès aux attributs privés de la classe
 	public int getRed() {
 		return red;
 	}
@@ -37,28 +39,5 @@ public class Segment{
 	public void setCount(int pixelNum) {
 		this.count = pixelNum;
 	}
-
-	public void setNext(Segment seg2) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void setSize(int size) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public int getSize() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-	
-	// Create darken_color method 
-	
-	// Create lighten_color method 
-	
-	// Create black_n_white method
-	
-	// Create negative_color method
 }
 

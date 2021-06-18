@@ -6,7 +6,7 @@ import spreadsheet_project.Terminal;
 
 public class Image {
 	
-	// Initialize attributs 
+	// Déclaration et initialisation des attributs de la classe
 	private String firstLine;
 	private int width;
 	private int height;
@@ -14,13 +14,14 @@ public class Image {
 	private String comment;
 	private List<Segment> segmentTab; // Array list of segment which define the image 
 	
-	// Constructor 
+	// Constructeur de la classe
 	public Image() {
 		setWidth(0);
 		setHeight(0);
 		setColorScale(0);
 	}
 
+	// Méthodes getter et setter permettant d'avoir accès aux attributs privés de la classe
 	public String getComment() {
 		return comment;
 	}
@@ -53,11 +54,6 @@ public class Image {
 		this.colorScale = colorScale;
 	}
 
-	public void setFirstSegment(Segment seg) {
-		// TODO Auto-generated method stub
-		
-	}
-
 	public String getFirstLine() {
 		return firstLine;
 	}
@@ -74,12 +70,7 @@ public class Image {
 		this.segmentTab = segmentTab;
 	}
 	
-	// Create show_size method
-	public void size() {
-		System.out.println(width + "x" + height);
-	}
-	
-	// Darken_image method
+	// Méthode pour assombrir les couleurs l'image par rapport à une couleur primaire choisie
 	public void darken() {
 		String color;
 		Terminal.ecrireString("Choisissez la couleur primaire que vous voulez assombrir dans l'image rouge, vert ou bleu :"); 
@@ -127,8 +118,8 @@ public class Image {
 		}
 	}
 	
-	// Lighten_image method
-		public void lighten() {
+	// Méthode pour éclaircir les couleurs l'image par rapport à une couleur primaire choisie
+	public void lighten() {
 			String color;
 			Terminal.ecrireString("Choisissez la couleur primaire que vous voulez assombrir dans l'image rouge, vert ou bleu :"); 
 			color = Terminal.lireString();
@@ -175,25 +166,25 @@ public class Image {
 			}
 		}
 	
-	// black_n_white method
-		public void black_n_white() {
-			for(int i = 0; i < segmentTab.size(); i++) {
-		    	Segment seg = new Segment();
-		    	seg = segmentTab.get(i);
-	    		int newVal = (seg.getRed()+seg.getGreen()+seg.getBlue())/3;
-	    		seg.setRed(newVal);
-	    		seg.setGreen(newVal);
-	    		seg.setBlue(newVal);		
-	    	}
-		}
+	// Méthode pour transformer en noir et blanc les couleurs l'image par rapport à une couleur primaire choisie
+	public void black_n_white() {
+		for(int i = 0; i < segmentTab.size(); i++) {
+	    	Segment seg = new Segment();
+	    	seg = segmentTab.get(i);
+    		int newVal = (seg.getRed()+seg.getGreen()+seg.getBlue())/3;
+    		seg.setRed(newVal);
+    		seg.setGreen(newVal);
+    		seg.setBlue(newVal);		
+    	}
+	}
 	
-	// Size display method
-		public void display_size() {
-			System.out.println("la taille de l'image est : "+this.width+ " x "+this.height+ " pixels");
-		}	
+	// Méthode pour afficher la taille de l'image en nombre de pixels
+	public void display_size() {
+		System.out.println("la taille de l'image est : "+this.width+ " x "+this.height+ " pixels");
+	}	
 	
 	// Create negative_image method
 	
-	// Create crop_image method respect inputs : l1, l2, c1, c2
+	// Create crop_image method respect inputs : l1, l2, c1, c2 
 
 }
