@@ -82,14 +82,14 @@ public class Image {
 	// Darken_image method
 	public void darken() {
 		String color;
-		Terminal.ecrireString("Choisissez la couleur primaire que vous voulez assombrir : rouge, vert ou bleu"); 
+		Terminal.ecrireString("Choisissez la couleur primaire que vous voulez assombrir dans l'image rouge, vert ou bleu :"); 
 		color = Terminal.lireString();
 		//color = color.replace("\\r", "\r");
 		//color = color.replace("\n", "");
-		System.out.println(color);
-		System.out.println(color.getClass());
+		//System.out.println(color);
+		//System.out.println(color.getClass());
     	if(color.charAt(0) == "rouge".charAt(0)) {
-    		System.out.println("in red");
+    		//System.out.println("in red");
 			for(int i = 0; i < segmentTab.size(); i++) {
 		    	Segment seg = new Segment();
 		    	seg = segmentTab.get(i);
@@ -128,8 +128,16 @@ public class Image {
 	}
 	
 	// Lighten_image method
-		public void lighten(String color) {
-	    	if(color == "red") {
+		public void lighten() {
+			String color;
+			Terminal.ecrireString("Choisissez la couleur primaire que vous voulez assombrir dans l'image rouge, vert ou bleu :"); 
+			color = Terminal.lireString();
+			//color = color.replace("\\r", "\r");
+			//color = color.replace("\n", "");
+			//System.out.println(color);
+			//System.out.println(color.getClass());
+	    	if(color.charAt(0) == "rouge".charAt(0)) {
+	    		//System.out.println("in red");
 				for(int i = 0; i < segmentTab.size(); i++) {
 			    	Segment seg = new Segment();
 			    	seg = segmentTab.get(i);
@@ -141,7 +149,7 @@ public class Image {
 			    	}	    		
 		    	}
 			}
-	    	if(color == "green") {
+	    	if(color.charAt(0) == "vert".charAt(0)) {
 				for(int i = 0; i < segmentTab.size(); i++) {
 			    	Segment seg = new Segment();
 			    	seg = segmentTab.get(i);
@@ -153,7 +161,7 @@ public class Image {
 			    	}	    		
 		    	}
 			}
-	    	if(color == "blue") {
+	    	if(color.charAt(0) == "bleu".charAt(0)) {
 				for(int i = 0; i < segmentTab.size(); i++) {
 			    	Segment seg = new Segment();
 			    	seg = segmentTab.get(i);
@@ -167,7 +175,22 @@ public class Image {
 			}
 		}
 	
-	// Create black_n_white method
+	// black_n_white method
+		public void black_n_white() {
+			for(int i = 0; i < segmentTab.size(); i++) {
+		    	Segment seg = new Segment();
+		    	seg = segmentTab.get(i);
+	    		int newVal = (seg.getRed()+seg.getGreen()+seg.getBlue())/3;
+	    		seg.setRed(newVal);
+	    		seg.setGreen(newVal);
+	    		seg.setBlue(newVal);		
+	    	}
+		}
+	
+	// Size display method
+		public void display_size() {
+			System.out.println("la taille de l'image est : "+this.width+ " x "+this.height+ " pixels");
+		}	
 	
 	// Create negative_image method
 	

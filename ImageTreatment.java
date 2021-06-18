@@ -255,17 +255,21 @@ public class ImageTreatment {
     public static void main(String[] args){  
     	Image image = new Image();  
     	Scanner scanner = new Scanner(System.in);
+    	boolean bool = true;
     	
     	// Demander à l'utilisateur les actions à réalisés
 	    String menu = "*** Menu *** \n"+
 	    "Pour choisir les différentes opérations, entrer la commande correspondante dans le terminal : \n" +
 	    "  Importer une image                                   i\n"+
 	    "  Assombrir                                            a\n"+
-	    "  Enregistrer une image                                e\n"+
+	    "  Eclaircir une image                                 ec\n"+
+	    "  Transformer l'image en noir et blanc                nb\n"+
+	    "  Afficher la taille de l'image                       at\n"+
+	    "  Enregistrer l'image                                  e\n"+
 	    "  Quitter le programme                                 q\n";
 	
 		// Tant que l'utilisateur n'a pas quitté, lui afficher le menu des choix
-		while(true){
+		while(bool){
 			System.out.print("\n" + menu);
 	  
 			// Enregistrer la commande de l'utilisateur et réaliser l'action correspondante
@@ -282,10 +286,22 @@ public class ImageTreatment {
 					case "a":
 						image.darken();
 				        break;
+					case "ec":
+						image.lighten();
+				        break;
+					case "nb":
+						image.black_n_white();
+				        break;
+					case "at":
+						image.display_size();
+				        break;	
 					case "e":
 						saveImage(image);
-					case "q":
 						break;
+				case "q":
+					bool = false;
+					break;
+					
 				default:
 					System.out.println("Error: Please enter one of the commands in the menu");
 		}
