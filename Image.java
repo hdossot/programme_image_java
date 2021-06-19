@@ -1,5 +1,6 @@
 package project;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import spreadsheet_project.Terminal;
@@ -183,8 +184,83 @@ public class Image {
 		System.out.println("la taille de l'image est : "+this.width+ " x "+this.height+ " pixels");
 	}	
 	
-	// Create negative_image method
+	// Méthode pour transformer les couleurs de l'image en son négatif
+	public void negative() {
+		for(int i = 0; i < segmentTab.size(); i++) {
+	    	Segment seg = new Segment();
+	    	seg = segmentTab.get(i);
+    		int newVal = this.colorScale;
+    		seg.setRed(newVal - seg.getRed());
+    		seg.setGreen(newVal - seg.getGreen());
+    		seg.setBlue(newVal - seg.getBlue());		
+    	}
+	}	
 	
-	// Create crop_image method respect inputs : l1, l2, c1, c2 
+	// Méthode pour couper une partie de l'image entre ces 4 points l1, l2, c1, c2 
+	public void cut_image() {
+		String l1, l2, c1, c2;
+		int l1_num, l2_num, c1_num, c2_num;
+		Terminal.ecrireString("choisissez la valeur des lignes et des colonnes entre lesquels vous voulez découper l'image :"); 
+		Terminal.ecrireString("l1 :");
+		l1 = Terminal.lireString();
+		l1_num = Integer.parseInt(l1); 
+		Terminal.ecrireString("l2 :");
+		l2 = Terminal.lireString();
+		l2_num = Integer.parseInt(l2); 
+		Terminal.ecrireString("c1 :");
+		c1 = Terminal.lireString();
+		c1_num = Integer.parseInt(c1); 
+		Terminal.ecrireString("c2 :");
+		c2 = Terminal.lireString();
+		c2_num = Integer.parseInt(c2); 
+		int colCount = 0;
+		int rowCount = 0;
+		int count = 0;
+		boolean init = true;
+		int redLast = 0;
+		int greenLast = 0;
+		int blueLast = 0;
+		List<Segment> NewSegmentTab = new ArrayList<>();
+		// Initialisation des variables last sur la première valeur de pixels entre les bornes
+		for(int i = 0; i < segmentTab.size(); i++) {
+			for(int j = 0; i < segmentTab.get(i).getCount(); i++) {
+				if (c1_num<=colCount && colCount<=c2_num && l1_num<=rowCount && rowCount<=l2_num && init) {
+					redLast = segmentTab.get(i).getRed();
+					greenLast = segmentTab.get(i).getGreen();
+					blueLast = segmentTab.get(i).getBlue();
+					init = false;
+					break;
+				}
+			}
+		}	
+		// On filtre les pixels qui sont entre les bornes demandées par l'utilisateur
+		for(int i = 0; i < segmentTab.size(); i++) {
+			for(int j = 0; i < segmentTab.get(i).getCount(); i++) {
+				if (c1_num<=colCount && colCount<=c2_num && l1_num<=rowCount && rowCount<=l2_num) {
+			    	Segment seg = new Segment();
+			    	Segment segNew = new Segment();
+			    	seg = segmentTab.get(i);
+			    	count += 1;
+			    	if(seg.getRed() != redLast || seg.getGreen() != greenLast || seg.getBlue() != blueLast) {
+			    		segNew.setRed(redLast);
+			    		segNew.setGreen(greenLast);
+			    		segNew.setBlue(blueLast);
+			    		NewSegmentTab.add(segNew);
+			    		redLast = seg.getRed();
+			    		greenLast = seg.getGreen();
+			    		blueLast = seg.getBlue();
+			    		count = 1;
+			    	}
+		    		
+				}
+				colCount += 1;
+	    		if(colCount == this.getWidth()) {
+	    			colCount = 0;
+	    			rowCount +=1;
+	    		}
+			}
+    	}
+		this.segmentTab = NewSegmentTab;
+	}
 
 }

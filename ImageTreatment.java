@@ -46,7 +46,7 @@ public class ImageTreatment {
 
 		String nomFichier ;
 		FileInputStream fichier ;
-		String imagePath = "/Users/henry/Desktop/_NFA032/_projet/"; 
+		String imagePath = "/"; 
 		int c;
 		
         String[] stringTab;
@@ -196,7 +196,7 @@ public class ImageTreatment {
 		FileOutputStream fichier ;
 		String aEcrire="";
 		int count=0;
-		String imagePath="/Users/henry/Desktop/_NFA032/_projet/";
+		String imagePath="/";
 		Terminal.ecrireString("Entrez le nom du chemin absolue vers le répertoire + le nom du fichier à enregister \n"
 				+ "exemple /Users/XXX/Desktop/_NFA032/_projet/truc_2.ppm :"); 
 		nomFichier = Terminal.lireString(); 
@@ -267,7 +267,9 @@ public class ImageTreatment {
 	    "  Assombrir les couleurs de l'image                            a\n"+
 	    "  Eclaircir les couleurs de l'image                           ec\n"+
 	    "  Transformer les couleurs de l'image en noir et blanc        nb\n"+
+	    "  Transformer les couleurs de l'image en negatif               n\n"+
 	    "  Afficher la taille de l'image                               at\n"+
+	    "  Couper l'image entre l1, l2, c1, c2                          c\n"+
 	    "  Enregistrer l'image dans un fichier                          e\n"+
 	    "  Quitter le programme                                         q\n";
 	
@@ -295,9 +297,15 @@ public class ImageTreatment {
 					case "nb":
 						image.black_n_white();
 				        break;
+					case "n":
+						image.negative();
+				        break;
 					case "at":
 						image.display_size();
 				        break;	
+					case "c":
+						image.cut_image();
+				        break;
 					case "e":
 						saveImage(image);
 						break;
@@ -309,9 +317,9 @@ public class ImageTreatment {
 					System.out.println("Error: Please enter one of the commands in the menu");
 		}
 	}
-	finally {
-		  
-	}
+	catch(NumberFormatException e){
+        System.out.println("Error: Not a number");
+      }
 		}
 		//System.out.println(image.getComment());
 		//image.darken("green");
